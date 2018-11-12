@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Web Service - Listar Passagens</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+    <link href="http://cdn.jsdelivr.net/webjars/bootstrap/3.3.4/css/bootstrap.min.css"
+          th:href="@{/webjars/bootstrap/3.3.5/css/bootstrap.min.css}"
+          rel="stylesheet" media="screen"/>
+
+    <script src="http://cdn.jsdelivr.net/webjars/jquery/2.1.4/jquery.min.js"
+            th:src="@{/webjars/jquery/2.1.4/jquery.min.js}"></script>
+
+    <link href="../../static/css/spring-core.css"
+          th:href="@{css/spring-core.css}" rel="stylesheet" media="screen"/>
+</head>
+<body>
+<div class="container">
+    <div th:if="${not #lists.isEmpty(passagem)}">
+        <h2>Lista de Passagens</h2>
+        <table class="table table-striped">
+            <tr>
+                <th>Id</th>
+                <th>Origem</th>
+                <th>Destino</th>
+                <th>Preço</th>
+                <th>Mostrar</th>
+                <th>Editar</th>
+                <th>Deletar</th>
+            </tr>
+            <tr th:each="passagem : ${passagem}">
+                <td th:text="${passagem.id}"></td>
+                <td th:text="${passagem.origem}"></td>
+                <td th:text="${passagem.destino}"></td>
+                <td th:text="${passagem.price}"></td>
+                <td><a th:href="${'/passagem/show/' + passagem.id}">Ver Mais</a> </td>
+                <td><a th:href="${'/passagem/edit/' + passagem.id}">Editar</a> </td>
+                <td><a th:href="${'/passagem/delete/' + passagem.id}">Deletar</a> </td>
+            </tr>
+        </table>
+    </div>
+    <div class="row">
+        <div class="col-sm-3">
+            <a href="/passagem/new">Nova Passagem</a>
+        </div>
+        <div class="col-sm-3">
+            <a href="/">Voltar</a>
+        </div>
+
+        <div class="col-sm-3">
+            <a href="/passagem/comprar">Comprar Passagem</a>
+        </div>
+
+        <select>
+            <tr th:each="passagem : ${passagem}">
+                <option th:text="${passagem.id}"></option>
+            </tr>
+        </select>
+    </div>
+</div>
+
+</body>
+</html>

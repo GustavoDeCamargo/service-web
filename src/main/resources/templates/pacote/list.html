@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Web Service - Listar Pacotes</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+    <link href="http://cdn.jsdelivr.net/webjars/bootstrap/3.3.4/css/bootstrap.min.css"
+          th:href="@{/webjars/bootstrap/3.3.5/css/bootstrap.min.css}"
+          rel="stylesheet" media="screen"/>
+
+    <script src="http://cdn.jsdelivr.net/webjars/jquery/2.1.4/jquery.min.js"
+            th:src="@{/webjars/jquery/2.1.4/jquery.min.js}"></script>
+
+    <link href="../../static/css/spring-core.css"
+          th:href="@{css/spring-core.css}" rel="stylesheet" media="screen"/>
+</head>
+<body>
+<div class="container">
+    <div th:if="${not #lists.isEmpty(pacote)}">
+        <h2>Lista de Pacotes</h2>
+        <table class="table table-striped">
+            <tr>
+                <th>Id</th>
+                <th>Origem</th>
+                <th>Destino</th>
+                <th>Preço</th>
+                <th>Mostrar</th>
+                <th>Editar</th>
+                <th>Deletar</th>
+            </tr>
+            <tr th:each="pacote : ${pacote}">
+                <td th:text="${pacote.id}"></td>
+                <td th:text="${pacote.description}"></td>
+                <td th:text="${pacote.destino}"></td>
+                <td th:text="${pacote.price}"></td>
+                <td><a th:href="${'/pacote/show/' + pacote.id}">Ver Mais</a> </td>
+                <td><a th:href="${'/pacote/edit/' + pacote.id}">Editar</a> </td>
+                <td><a th:href="${'/pacote/delete/' + pacote.id}">Deletar</a> </td>
+            </tr>
+        </table>
+    </div>
+    <div class="row">
+        <div class="col-sm-3">
+            <a href="/pacote/new">Novo Pacote</a>
+        </div>
+        <div class="col-sm-3">
+            <a href="/pacote/comprar">Comprar Pacote</a>
+        </div>
+        <div class="col-sm-3">
+            <a href="/">Voltar</a>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
